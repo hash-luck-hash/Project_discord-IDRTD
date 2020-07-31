@@ -84,7 +84,7 @@ function test()
     check_out_event(Arg_Test);  
 }
 
-function calendar(Arguments_f,message){///////////////////blad
+function calendar(Arguments_f,message){//////////////////blad
   Arguments_f.length = 0;
   Arguments_f.push(new Ping(200,'2020.12.14 15:09','Hello!','@admin'));
   Arguments_f.push(new Ping(200,'2017.12.14 16:09','Hello!','ło co chodzi'));
