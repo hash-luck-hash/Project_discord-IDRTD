@@ -58,10 +58,6 @@ function check_out_event(Arguments_f){////////////////////defaultChannel
     Arguments_f.shift();
   }
 }
-function Reminding(){
- // check_out_event();
-    //client on which works all time
-}
 function help(message){
   const emb =  new Discord.RichEmbed()
   .setTitle('Command helper')
@@ -85,22 +81,18 @@ function test()
 }
 
 function calendar(Arguments_f,message){//////////////////blad
-  Arguments_f.length = 0;
+  var ListofEvents ='';
+  /*Arguments_f.length = 0;
   Arguments_f.push(new Ping(200,'2020.12.14 15:09','Hello!','@admin'));
-  Arguments_f.push(new Ping(200,'2017.12.14 16:09','Hello!','ło co chodzi'));
-
+  Arguments_f.push(new Ping(200,'2017.12.14 16:09','Hello!','ło co chodzi'));*/
+  console.log(Arguments_f.length);
   if(Arguments_f.length==0) { message.reply('Soon will be no events!'); return; }
-    var em = new Discord.RichEmbed()
-    .setTitle('That is your calender')
-    .setColor(Math.floor(Math.random() * 16777214) + 1)
-    .setDescription('There is list of all events that will held soon');
 
     for(var i=0;i<Arguments_f.length;i++)
     {     
-      em.addField('Description of event: ',Arguments_f[i].desc,
-      'Date of event: ' + Arguments_f[i].date+' It is important for: ' + Arguments_f[i].ping_group);
+      ListofEvents+='Description of event: ' + Arguments_f[i].desc + '\nDate of event: ' + Arguments_f[i].date + ' It is important for: ' + Arguments_f[i].ping_group +'\n\n';
     }
-    defaultChannel.sendEmbed(em);
+    defaultChannel.send(ListofEvents);
 }
 
 /////////////loooooooop////////////////
@@ -138,6 +130,8 @@ client.on('message', async message => {
               args = args
               .trim()
               .split(/ +/g); 
+              if(!args[0]) args[0]=0; if(!args[1]) args[1]=0; if(!args[2]) args[2]=0; if(!args[3]) args[3]=0; if(!args[4]) args[4]=0;
+              console.log(args[0]+' '+args[1]+' '+args[2]+' '+args[3]+' '+args[4]);
               if(normal_date(args[0],args[1],args[2],args[3],args[4])){  
                     var data = Math.floor((new Date(args[0],args[1],args[2],args[3],args[4])-0)/1000);
                     var data_1 = data - 604800;
@@ -160,15 +154,16 @@ client.on('message', async message => {
                                 let collector_3 =  new Discord.MessageCollector(message.channel, filter);
                                 collector_3.on('collect', (msgef, col) => {
                                   console.log(msgef.content);
+                                  //msgef.reply(msgef.content);
                                   //ARRAY INSERT PING
                                   if(data_now<data_1)
-                                  Arguments.push(new Ping(data_1,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.contest));
+                                  Arguments.push(new Ping(data_1,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.content));
                                   if(data_now<data_2)
-                                  Arguments.push(new Ping(data_2,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.contest));
+                                  Arguments.push(new Ping(data_2,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.content));
                                   if(data_now<data_3)
-                                  Arguments.push(new Ping(data_3,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.contest));
+                                  Arguments.push(new Ping(data_3,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.content));
                                   if(data_now<data_4)
-                                  Arguments.push(new Ping(data_4,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.contest));
+                                  Arguments.push(new Ping(data_4,args[0]+"."+args[1]+"."+args[2]+" "+args[3]+":"+args[4],tresc,msgef.content));
                                     Arguments.sort(compareNumbers);
                                     msgef.reply('Event was added!');
                                   collector_3.stop();
