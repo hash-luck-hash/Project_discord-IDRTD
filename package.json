@@ -1,0 +1,18 @@
+{
+  "name": "project_discord",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "node": "node index.js",
+    "nodemon": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lukasz Prochniak",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "node": "^14.5.0",
+    "nodemon": "^2.0.4"
+  }
+}
